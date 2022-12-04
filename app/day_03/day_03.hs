@@ -1,5 +1,6 @@
 import Data.List
 import Data.Maybe
+import Data.List.Split
 
 part1 :: String -> Int 
 part1 input = do
@@ -28,9 +29,9 @@ repetitive line = do
 
 commonItems first second = [ c | c <- first, elem c second]
 
--- wip
 part2 :: String -> Int 
 part2 input = do
     let rucksacks = lines input
-
-    length rucksacks
+    let chunks = chunksOf 3 rucksacks
+    let inter = [ intersect (ch !! 0) ( intersect (ch !! 1) (ch !! 2) ) | ch <- chunks ]
+    length [ i | i <- inter, not (null i) ]
